@@ -18,22 +18,37 @@ public class CombatManager {
     }
 
     public void fightEnemy(Enemy enemy) {
-        if(!enemies.contains(enemy)){
-            System.out.println("Error" + enemy.getEnemyName() + " is not the enemy list.");
-
+        if (player.isDefeated()) {
+            System.out.println(player.getPlayerName() + " has perished. Game Over.");
+            return;
         }
-        else {
-            System.out.println(player.getPlayerName() + " engages in combat with " + enemy.getEnemyName() + "!");
-            enemy.attack();
-            player.setPlayerHealth(player.getPlayerHealth() - enemy.getEnemyDMG());
 
-            player.setPlayerExperience(player.getPlayerExperience() + enemy.getEnemyXP());
+        if (!enemies.contains(enemy)) {
+            System.out.println("Error: " + enemy.getEnemyName() + " is not in the enemy list.");
+            return;
+        }
 
-            System.out.println("After combat: Health = " + player.getPlayerHealth() + ", Experience = " + player.getPlayerExperience());
+        System.out.println(player.getPlayerName() + " engages in combat with " + enemy.getEnemyName() + "!");
+
+        enemy.takeDamage(player.getPlayerDMG());
+
+        enemy.attack();
+        player.takeDamage(enemy.getEnemyDMG());
+
+        if (player.isDefeated()) {
+            System.out.println(player.getPlayerName() + " has been defeated!");
+            return;
+        }
+
+        if (enemy.isDefeated()) {
+            System.out.println(enemy.getEnemyName() + " has been defeated!");
+            player.addPlayerExperience(enemy.getEnemyXP());
             score.addKE();
             score.addScore(2);
             enemies.remove(enemy);
         }
+
+        System.out.println("After combat: Health = " + player.getPlayerHealth() + ", Experience = " + player.getPlayerExperience());
     }
 
     public void addEnemy(Enemy enemy) {

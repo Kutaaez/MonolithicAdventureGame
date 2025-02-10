@@ -27,7 +27,7 @@ public class ItemManager {
             item.itemEffect();
             player.setPlayerHealth(player.getPlayerHealth() + item.getItemHP());
 
-            player.setPlayerExperience(player.getPlayerExperience() + item.getItemEXP());
+            player.addPlayerExperience(item.getItemEXP());
 
             System.out.println("After lifting the item: Health = " + player.getPlayerHealth() + ", Experience = " + player.getPlayerExperience());
             player.addItemToInventory(item);

@@ -1,9 +1,9 @@
 package enemies;
 
 
-import player.Player;
+import combat.IAttackable;
 
-    public abstract class Enemy {
+    public abstract class Enemy implements IAttackable {
         private String enemyName;
         private int enemyHP;
         private int enemyDMG;
@@ -32,6 +32,14 @@ import player.Player;
         return enemyXP;
     }
     public abstract  void attack();
+        @Override
+        public void takeDamage(int damage) {
+            this.enemyHP -= damage;
+        }
 
+        @Override
+        public boolean isDefeated() {
+            return enemyHP <= 0;
+        }
 }
 

@@ -1,14 +1,16 @@
 package player;
 
 import Items.Item;
+import combat.IAttackable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player {
+public class Player implements IAttackable {
     private String playerName;
     private int playerHealth;
     private int playerExperience;
+    private int playerDMG;
     private List<Item> inventory;
 
     public Player(String playerName) {
@@ -16,6 +18,7 @@ public class Player {
         this.playerHealth = 100;
         this.playerExperience = 0;
         this.inventory = new ArrayList<>();
+        this.playerDMG = 50;
     }
 
     public String getPlayerName() {
@@ -38,8 +41,8 @@ public class Player {
         this.playerHealth = playerHealth;
     }
 
-    public void setPlayerExperience(int playerExperience) {
-        this.playerExperience = playerExperience;
+    public void addPlayerExperience(int EXP) {
+        this.playerExperience += EXP;
     }
 
     public void addItemToInventory(Item item) {
@@ -48,5 +51,18 @@ public class Player {
 
     public void removeItemFromInventory(Item item) {
         inventory.remove(item);
+    }
+    @Override
+    public void takeDamage(int damage) {
+        this.playerHealth -= damage;
+    }
+
+    public int getPlayerDMG() {
+        return playerDMG;
+    }
+
+    @Override
+    public boolean isDefeated() {
+        return playerHealth <= 0;
     }
 }
