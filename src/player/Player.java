@@ -1,5 +1,7 @@
 package player;
 
+import Items.Item;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +9,7 @@ public class Player {
     private String playerName;
     private int playerHealth;
     private int playerExperience;
-    private List<String> inventory;
+    private List<Item> inventory;
 
     public Player(String playerName) {
         this.playerName = playerName;
@@ -28,7 +30,7 @@ public class Player {
         return playerExperience;
     }
 
-    public List<String> getInventory() {
+    public List<Item> getInventory() {
         return inventory;
     }
 
@@ -40,11 +42,11 @@ public class Player {
         this.playerExperience = playerExperience;
     }
 
-    public void addItemToInventory(String item) {
+    public void addItemToInventory(Item item) {
         inventory.add(item);
     }
 
-    public void removeItemFromInventory(String item) {
+    public void removeItemFromInventory(Item item) {
         inventory.remove(item);
     }
 }
